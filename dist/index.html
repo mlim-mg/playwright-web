@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Playwright Tests</title>
+</head>
+
+<body>
+    <h1>Run Playwright Tests</h1>
+    <form id="test-form">
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" required>
+        <button type="submit">Run Tests</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('test-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const response = await fetch('/run-tests', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+            const result = await response.json();
+            document.getElementById('result').textContent = `Page title: ${result.title}`;
+        });
+    </script>
+</body>
+
+</html>

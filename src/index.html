@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Playwright Tests</title>
+</head>
+
+<body>
+    <h1>Run Playwright Tests</h1>
+    <form id="test-form">
+        <button type="submit">Run Best Life Follow Up Lab Test</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const response = await fetch('/run-tests', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify()
+            });
+            const result = await response.json();
+            document.getElementById('result').textContent = `Page title: ${result}`;
+        });
+    </script>
+</body>
+
+</html>
